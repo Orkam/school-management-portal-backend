@@ -8,6 +8,8 @@ package com.management.portal.Model;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,6 +49,7 @@ public class User {
 	private String profile;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	@JsonIgnore
 	private Set<UserRole> userRols = new HashSet<>();
 	
 	

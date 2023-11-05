@@ -6,9 +6,11 @@
 package com.management.portal.Controller;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,9 +39,15 @@ public class UserController {
 		userRole.setRole(role);
 		userRole.setUser(user);
 		userRoleSet.add(userRole);
-		
 
 		userServices.saveUser(user, userRoleSet);
+
+	}
+
+	@GetMapping("/allUsers")
+	public List<User> getUsers() {
+
+		return userServices.getUsers();
 
 	}
 

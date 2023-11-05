@@ -5,6 +5,7 @@
 */
 package com.management.portal.Services;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,12 @@ public class UserServicesImpl implements UserServices {
 			user.getUserRols().addAll(roles);
 			userRepository.save(user);
 		}
+	}
+
+	@Override
+	public List<User> getUsers() {
+		
+		return userRepository.findAll();
 	}
 
 }
