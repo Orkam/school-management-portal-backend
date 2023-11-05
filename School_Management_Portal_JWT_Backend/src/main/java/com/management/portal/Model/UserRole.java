@@ -14,8 +14,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="userRol")
-public class UserRol {
+@Table(name="userRole")
+public class UserRole {
 	
 	
 	@Id
