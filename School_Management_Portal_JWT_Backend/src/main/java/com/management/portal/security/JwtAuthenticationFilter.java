@@ -7,6 +7,8 @@ package com.management.portal.security;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,6 +16,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.management.portal.Model.User;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -44,11 +47,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 
-		UserDetailsImpl userDetailsImpl = (UserDetailsImpl) authResult.getPrincipal();
+		User userDetailsImpl = (User) authResult.getPrincipal();
 
 		String token = TokenUtils.createToken(userDetailsImpl.getUsername(), userDetailsImpl.getPassword());
 
 		response.addHeader("Authorization", "Bearer " + token);
+		Map<String, Object> httpResponse = new HashMap<>();
+        httpResponse.put("token", token);
+   
+        response.getWriter().write(new ObjectMapper().writeValueAsString(httpResponse));
 		response.getWriter().flush();
 		
 

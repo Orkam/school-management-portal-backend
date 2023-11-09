@@ -17,12 +17,11 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
-
 public class TokenUtils {
 
 	private final static String ACCESS_TOKEN_SECRET = "$2a$12$1r44JsX.4ho9sEj1hUKpcOBWHIH3BEEd4q/.qv8PIIJClVrRZLQHe";
 
-	public static String createToken(String username, String email) {
+	public  static String createToken(String username, String email) {
 
 		Map<String, Object> extra = new HashMap<>();
 

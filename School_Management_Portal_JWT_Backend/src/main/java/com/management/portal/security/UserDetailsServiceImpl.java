@@ -5,7 +5,8 @@
 */
 package com.management.portal.security;
 
-import java.util.Optional;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.management.portal.Model.Authority;
 import com.management.portal.Model.User;
 import com.management.portal.Repository.UserRepository;
 
@@ -33,7 +35,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("User not found " + username);
 		}
 
-		return new UserDetailsImpl(userDb);
+		Set<Authority> autorities = new HashSet<>();
+		userDb.getUserRols().forEach(usuarioRol -> {
+			autorities.add(new Authority(usuarioRol.getRole().getName()));
+		});
+
+		return (UserDetails) userDb;
 	}
 
 }
