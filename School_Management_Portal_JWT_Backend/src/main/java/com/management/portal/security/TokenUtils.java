@@ -12,6 +12,8 @@ import java.util.Map;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+import com.management.portal.Model.User;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -21,15 +23,13 @@ public class TokenUtils {
 
 	private final static String ACCESS_TOKEN_SECRET = "$2a$12$1r44JsX.4ho9sEj1hUKpcOBWHIH3BEEd4q/.qv8PIIJClVrRZLQHe";
 
-	public  static String createToken(String username, String email) {
+	public static String createToken(User user) {
 
-		Map<String, Object> extra = new HashMap<>();
 
-		extra.put("email", email);
 
 		return Jwts.builder()
 
-				.setSubject(username).addClaims(extra).setIssuedAt(new Date(System.currentTimeMillis()))
+				.setSubject(user.getUsername()).claim("authorities", user.getAuthorities()).setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
 				.signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes())).compact();
 	}

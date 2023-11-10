@@ -5,15 +5,14 @@
 */
 package com.management.portal.Controller;
 
-import java.net.URI;
 import java.security.Principal;
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,19 +32,15 @@ public class UserController {
 
 	@Autowired
 	private UserServices userServices;
-	
 
 	@PostMapping("/saveUser")
 	public ResponseEntity<User> saveUserAPI(@RequestBody UserDTO userDTO) throws Exception {
 
-		userDTO.setToken(TokenUtils.createToken(userDTO.getUsername(), userDTO.getEmail()));
-
 		User user = userServices.saveUser(userDTO);
 
-		return ResponseEntity.created(URI.create("/users" + user.getId())).body(user);
+		return ResponseEntity.ok(user);
 
 	}
-
 
 	@GetMapping("/allUsers")
 	public List<User> getUsers() {
@@ -54,9 +49,9 @@ public class UserController {
 
 	}
 
-	@GetMapping("/actual-user")
+	@GetMapping("/current-user")
 	public User getCurrentUser(Principal principal) throws Exception {
-		return  this.userServices.loadUserByUsername(principal.getName());
+		return this.userServices.loadUserByUsername(principal.getName());
 	}
 
 }

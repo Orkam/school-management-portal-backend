@@ -23,18 +23,15 @@ public class UserDTO {
 	private boolean enable = true;
 	private String profile;
 	private String token;
+	private String role;
 	private Set<UserRole> userRols = new HashSet<>();
 	
 	
 	
 	
-	
 
-	public UserDTO() {
-		super();
-	}
 	public UserDTO(Long id, String username, String password, String name, String surname, String email, String phone,
-			boolean enable, String profile, String token, Set<UserRole> userRols) {
+			boolean enable, String profile, String token, String role, Set<UserRole> userRols) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -46,8 +43,14 @@ public class UserDTO {
 		this.enable = enable;
 		this.profile = profile;
 		this.token = token;
+		this.role = role;
 		this.userRols = userRols;
 	}
+
+	public UserDTO() {
+		super();
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -114,6 +117,16 @@ public class UserDTO {
 	public void setUserRols(Set<UserRole> userRols) {
 		this.userRols = userRols;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
 
 	
 	

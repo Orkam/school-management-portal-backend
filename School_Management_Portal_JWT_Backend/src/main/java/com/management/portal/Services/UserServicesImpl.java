@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -61,8 +62,8 @@ public class UserServicesImpl implements UserServices {
 			user.setPhone(userDto.getPhone());
 
 			Role role = new Role();
-			role.setId(1L);
-			role.setName("Normal");
+			role.setId(userDto.getRole().equals("Normal") ? 1L : 2L);
+			role.setName(userDto.getRole());
 
 			UserRole userRole = new UserRole();
 			userRole.setRole(role);
@@ -86,7 +87,6 @@ public class UserServicesImpl implements UserServices {
 		return userRepository.findAll();
 	}
 
-	
 	@Override
 	public User loadUserByUsername(String username) throws Exception {
 		User user = userRepository.findByUsername(username);

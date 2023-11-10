@@ -35,12 +35,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("User not found " + username);
 		}
 
-		Set<Authority> autorities = new HashSet<>();
-		userDb.getUserRols().forEach(usuarioRol -> {
-			autorities.add(new Authority(usuarioRol.getRole().getName()));
-		});
-
 		return (UserDetails) userDb;
+
 	}
 
 }

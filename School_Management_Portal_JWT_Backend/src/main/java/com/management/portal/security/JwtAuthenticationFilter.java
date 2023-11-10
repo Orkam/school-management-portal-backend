@@ -49,7 +49,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 		User userDetailsImpl = (User) authResult.getPrincipal();
 
-		String token = TokenUtils.createToken(userDetailsImpl.getUsername(), userDetailsImpl.getPassword());
+		String token = TokenUtils.createToken(userDetailsImpl);
 
 		response.addHeader("Authorization", "Bearer " + token);
 		Map<String, Object> httpResponse = new HashMap<>();
