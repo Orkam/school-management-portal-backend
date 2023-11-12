@@ -82,9 +82,9 @@ public class UserServicesImpl implements UserServices {
 	}
 
 	@Override
-	public List<User> getUsers() {
+	public List<UserDTO> getUsers() {
 
-		return userRepository.findAll();
+		return userRepository.getAllUser();
 	}
 
 	@Override
@@ -98,4 +98,19 @@ public class UserServicesImpl implements UserServices {
 		return user;
 	}
 
+	@Override
+	public List<UserDTO> getListUserByRole(String role) {
+		
+	 return	userRepository.getListUserByRole(role);
+		
+		
+	}
+
+	@Override
+	public List<UserDTO> getListUserByName(String name, String surname) {
+	
+		return userRepository.getListUserByName(name, surname);
+	}
+
+	
 }

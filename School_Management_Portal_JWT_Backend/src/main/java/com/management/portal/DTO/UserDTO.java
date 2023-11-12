@@ -28,7 +28,16 @@ public class UserDTO {
 	
 	
 	
-	
+	public UserDTO(Long id, String name, String surname, String email, String phone, boolean enable, String role) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.phone = phone;
+		this.enable = enable;
+		this.role = role;
+	}
 
 	public UserDTO(Long id, String username, String password, String name, String surname, String email, String phone,
 			boolean enable, String profile, String token, String role, Set<UserRole> userRols) {
