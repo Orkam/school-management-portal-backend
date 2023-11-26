@@ -52,12 +52,12 @@ public class AssignmentController {
 	}
 
 	@DeleteMapping("/{assignmentID}")
-	public void eliminarExamen(@PathVariable("assignmentID") Long assignmentID) {
+	public void deleteAssigment(@PathVariable("assignmentID") Long assignmentID) {
 		assignmentServices.deleteAssigment(assignmentID);
 	}
 
 	@GetMapping("/cathegory/{cathegoryID}")
-	public List<Assignment> listarExamenesDeUnaCategoria(@PathVariable("cathegoryID") Long cathegoryID) {
+	public List<Assignment> listAssignmentOneCathegory(@PathVariable("cathegoryID") Long cathegoryID) {
 		Cathegory cathegory = new Cathegory();
 		cathegory.setCathegoryID(cathegoryID);
 		return assignmentServices.listAssignmentOneCathegory(cathegory);
